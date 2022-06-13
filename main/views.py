@@ -13,6 +13,10 @@ def index(request):
 
 class ProjectListView(ListView):
     model = Project
+    template_name = 'index.html' # <app>/<model>_<viewtype>.html
+    context_object_name = 'projects'
+    ordering = ['-date_posted']
+
 
 def about(request):
     title='About'
