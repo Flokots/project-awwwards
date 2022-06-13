@@ -29,9 +29,19 @@
           {% for project in projects %} 
           <div class="col">
             <div class="card shadow-sm album-card">
-              <img src="{{project.landing_page.url}}" alt="{{image.altText}}">
-              </svg>
+              <div class="card-header">
+               <div class="row">
+                <div>
+                  <img class="rounded-circle project-img" src="{{ project.developer.profile.image.url}}">
+                </div>
 
+                <div>
+                  <h5 class="card-title">{{project.title}}</h5>
+                </div>
+               </div>
+              </div>
+              <img src="{{project.landing_page.url}}" alt="{{image.altText}}">
+         
               <div class="card-body">
                 <p class="card-text">{{project.description|truncatechars:130}}..</p>
                 <div class="d-flex justify-content-between align-items-center">

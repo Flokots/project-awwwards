@@ -84,3 +84,9 @@ body {
 .text-mutedi {
   color: #ffca7a;
 }
+
+.project-img {
+  height: 55px;
+  width: 55px;
+  margin-right: 16px;
+}
