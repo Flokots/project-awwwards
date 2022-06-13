@@ -48,3 +48,16 @@
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
+
+body {
+  background-color: #0a2f35;
+  color: #ffffff;
+}
+
+.album-lead {
+  color: #f56038;
+}
+
+.album-card {
+  background-color:#f7a325;
+}
