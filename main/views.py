@@ -1,7 +1,5 @@
-from pyexpat import model
-from typing import List
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Project
 
 
@@ -16,6 +14,9 @@ class ProjectListView(ListView):
     template_name = 'index.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'projects'
     ordering = ['-date_posted']
+
+class ProjectDetailView(DetailView):
+    model = Project
 
 
 def about(request):
