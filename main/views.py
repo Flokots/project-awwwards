@@ -1,10 +1,13 @@
+from turtle import title
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
 
 def index(request):
-    return render(request, 'index.html')
+    title='Home'
+    return render(request, 'index.html', {'title': title})
 
 def about(request):
-    return render(request, 'about.html')
+    title='About'
+    return render(request, 'about.html', {'title': title})
 
