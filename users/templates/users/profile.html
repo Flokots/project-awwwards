@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+{% block content %}
+{{block.super}}
+<body class="logout-page" style="color: #f56038; background-color: #0a2f35;">
+    <div class="container">
+        <h1> {{ user.username }}</h1>
+    </div>
+</body>
+
+
+{% endblock %}
