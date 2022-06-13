@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
-
+from .models import Project
 
 def index(request):
     title='Home'
-    return render(request, 'index.html', {'title': title})
+    projects= Project.objects.all()
+    return render(request, 'index.html', {'title': title, 'projects': projects})
 
 def about(request):
     title='About'
