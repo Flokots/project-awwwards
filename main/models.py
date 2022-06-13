@@ -9,3 +9,6 @@ class Project(models.Model):
     landing_page = models.ImageField(default='default.jpg', upload_to='landing_pages/')
     date_posted = models.DateTimeField(default=timezone.now)
     developer = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
