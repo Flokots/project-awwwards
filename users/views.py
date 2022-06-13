@@ -1,3 +1,4 @@
+from turtle import title
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -16,7 +17,9 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+
+    title='Register'
+    return render(request, 'users/register.html', {'form': form, 'title': title})
 
 
 @login_required
@@ -36,5 +39,5 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
-
-    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form})
+    title='Profile'
+    return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form, 'title': title})
