@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+{% load static %}
 
 {% block content %}
 {{block.super}}
@@ -8,6 +9,9 @@
 <main>
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
+      <div class="col-auto d-none d-lg-block">
+        <img src="{% static 'assets/awards.jpg' %}" width="200" height="250" class="rounded">
+      </div>
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">The Nightngale Project Awwwards</h1>
         <p class="lead album-lead">
@@ -18,7 +22,11 @@
           <a href="#" class="btn btn-secondary my-2">Review</a>
         </p>
       </div>
+      <div class="col-auto d-none d-lg-block">
+        <img src="{% static 'assets/award_badge.jpg' %}" width="200" height="250" class="rounded-circle">
+      </div>
     </div>
+
   </section>
 
   <div class="album py-5">
