@@ -54,8 +54,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Project
-    template_name = 'project_detail.html'
-
+    success_url = '/'
 
     def test_func(self):
         project = self.get_object()
