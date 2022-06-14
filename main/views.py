@@ -30,7 +30,6 @@ class ProjectDetailView(DetailView):
 class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     fields = ['title', 'landing_page', 'description', 'link']
-    template_name = 'project_form.html'
 
     def form_valid(self, form):
         form.instance.developer = self.request.user
@@ -40,7 +39,6 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     fields = ['title', 'landing_page', 'description', 'link']
-    template_name = 'project_form.html'
 
     def form_valid(self, form):
         form.instance.developer = self.request.user
