@@ -4,7 +4,8 @@ from django.views.generic import (
     ListView, 
     DetailView, 
     CreateView,
-    UpdateView
+    UpdateView,
+    DeleteView,
 )
 from .models import Project
 
@@ -49,6 +50,20 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == project.developer:
             return True
         return False
+
+
+class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Project
+    template_name = 'project_detail.html'
+
+
+    def test_func(self):
+        project = self.get_object()
+        if self.request.user == project.developer:
+            return True
+        return False
+
+
 
 def about(request):
     title='About'

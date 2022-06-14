@@ -23,7 +23,7 @@
             </small>
             {% if object.developer == user %}
             <div class="mt-3">
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="">Update</a>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-update' object.id %}">Update</a>
                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="">Delete</a>
             </div>
             {% else %}
