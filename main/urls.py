@@ -4,12 +4,14 @@ from .views import (
     ProjectDetailView,
     ProjectCreateView,
     ProjectUpdateView, 
-    ProjectDeleteView
+    ProjectDeleteView,
+    UserProjectListView,
 )
 from . import views
 
 urlpatterns=[
     path('', ProjectListView.as_view(), name='index'),
+    path('user/<str:username>', UserProjectListView.as_view(), name='user-projects'),
     path('project/<int:pk>/', ProjectDetailView.as_view(), name='project-detail'),
     path('project/new/', ProjectCreateView.as_view(), name='project-create'),
     path('project/<int:pk>/update/', ProjectUpdateView.as_view(), name='project-update'),

@@ -31,10 +31,22 @@
             <div class="card-header">
               <div class="row">
                 <div>
+                 <a href="{% url 'user-projects' project.developer.username %}">
                   <img class="rounded-circle project-img" src="{{ project.developer.profile.image.url}}">
+                </a>
+                  <small class="text-muted">Posted on {{ project.date_posted|date:"d M Y"  }}
+                </small>
                 </div>
                 <div>
-                  <h5 class="card-title"><a class="text-mutedi" href="{% url 'project-detail' project.id %}">{{project.title}}</a></h5>
+                  <h5 class="card-title text-center">
+                    <a class="text-mutedi" href="{% url 'project-detail' project.id %}">{{project.title}}</a>
+                  </h5>
+                  <p class="text-center text-muted">
+                    by 
+                    <a class="mr-2" href="{% url 'user-projects' project.developer.username %}">
+                    {{ project.developer }}
+                    </a> 
+                  </p>
                 </div>
               </div>
             </div>

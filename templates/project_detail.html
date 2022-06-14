@@ -9,7 +9,7 @@
         <img class="center-items py-5" src="{{ object.landing_page.url }}" style="width: 536px; height: 322px">
         <div class="text-center  mb-4">
             <h2 class="article-title"><a href="{{object.link}}">{{ object.title }}</a></h2>
-            <small class="text-mutedi">By <a class="text-mutedi" href="#">{{ object.developer }}</a></small>
+            <small class="text-mutedi">By <a class="text-mutedi"href="{% url 'user-projects' project.developer.username %}">{{ object.developer }}</a></small>
         </div>
         <div>
             <p class="text-center">{{ object.description }}</p>
@@ -17,7 +17,7 @@
         <div class="article-metadata mb-4">
             <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
             <small class="text-muted"> Posted {{ object.date_posted|timesince }} ago by 
-                <a class="mr-2" href="#">
+                <a class="mr-2" href="{% url 'user-projects' object.developer.username %}">
                 {{ object.developer }}
                 </a> 
             </small>

@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -8,6 +9,7 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import Project
+from users.models import Profile
 
 
 
@@ -23,6 +25,18 @@ class ProjectListView(ListView):
     context_object_name = 'projects'
     ordering = ['-date_posted']
     paginate_by = 3
+
+
+class UserProjectListView(ListView):
+    model = Project
+    template_name = 'main/user_projects.html' # <app>/<model>_<viewtype>.html
+    context_object_name = 'projects'
+    paginate_by = 3
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Project.objects.filter(developer=user).order_by('-date_posted')
+
 
 class ProjectDetailView(DetailView):
     model = Project
