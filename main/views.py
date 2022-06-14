@@ -22,6 +22,7 @@ class ProjectListView(ListView):
     template_name = 'index.html' # <app>/<model>_<viewtype>.html
     context_object_name = 'projects'
     ordering = ['-date_posted']
+    paginate_by = 3
 
 class ProjectDetailView(DetailView):
     model = Project
