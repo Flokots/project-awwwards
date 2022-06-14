@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import (
+    ListView, 
+    DetailView, 
+    CreateView
+)
 from .models import Project
 
 
@@ -18,6 +22,11 @@ class ProjectListView(ListView):
 class ProjectDetailView(DetailView):
     model = Project
     template_name = 'project_detail.html'
+
+
+class ProjectCreateView(CreateView):
+    model = Project
+    fields = ['title', 'landing_page', 'description', 'link']
 
 def about(request):
     title='About'
