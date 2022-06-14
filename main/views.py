@@ -17,7 +17,7 @@ class ProjectListView(ListView):
 
 class ProjectDetailView(DetailView):
     model = Project
-
+    template_name = 'project_detail.html'
 
 def about(request):
     title='About'
