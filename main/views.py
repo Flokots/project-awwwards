@@ -27,6 +27,7 @@ class ProjectDetailView(DetailView):
 class ProjectCreateView(CreateView):
     model = Project
     fields = ['title', 'landing_page', 'description', 'link']
+    template_name = 'project_form.html'
 
 def about(request):
     title='About'
