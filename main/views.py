@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, 
     DetailView, 
-    CreateView
+    CreateView,
+    UpdateView
 )
 from .models import Project
 
@@ -27,6 +28,16 @@ class ProjectDetailView(DetailView):
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
+    model = Project
+    fields = ['title', 'landing_page', 'description', 'link']
+    template_name = 'project_form.html'
+
+    def form_valid(self, form):
+        form.instance.developer = self.request.user
+        return super().form_valid(form)
+
+
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     fields = ['title', 'landing_page', 'description', 'link']
     template_name = 'project_form.html'
