@@ -6,31 +6,30 @@
 
 
 <main>
-
-    <section class="py-5 text-center container">
-      <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">The Nightngale Project Awwwards</h1>
-          <p class="lead album-lead">
-            Post a project and let your peers review it.
-          </p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Post</a>
-            <a href="#" class="btn btn-secondary my-2">Review</a>
-          </p>
-        </div>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">The Nightngale Project Awwwards</h1>
+        <p class="lead album-lead">
+          Post a project and let your peers review it.
+        </p>
+        <p>
+          <a href="#" class="btn btn-primary my-2">Post</a>
+          <a href="#" class="btn btn-secondary my-2">Review</a>
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="album py-5">
-      <div class="container">
-        <h3 class="border-bottom mb-4 pt-3 text-center">Projects</h3>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          {% for project in projects %} 
-          <div class="col">
-            <div class="card shadow-sm album-card">
-              <div class="card-header">
-               <div class="row">
+  <div class="album py-5">
+    <div class="container">
+      <h3 class="border-bottom mb-4 pt-3 text-center">Projects</h3>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for project in projects %}
+        <div class="col">
+          <div class="card shadow-sm album-card">
+            <div class="card-header">
+              <div class="row">
                 <div>
                   <img class="rounded-circle project-img" src="{{ project.developer.profile.image.url}}">
                 </div>
@@ -38,28 +37,30 @@
                 <div>
                   <h5 class="card-title">{{project.title}}</h5>
                 </div>
-               </div>
               </div>
-              <img src="{{project.landing_page.url}}" alt="{{image.altText}}">
-         
-              <div class="card-body">
-                <p class="card-text">{{project.description|truncatechars:130}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="" target="_blank" type="button"
-                        class="btn btn-sm btn-outline-primary">Rate</a>
-                    <a href="" type="button" class="btn btn-sm btn-warning">Review</a>
+            </div>
+            <img src="{{project.landing_page.url}}" alt="{{image.altText}}">
+
+            <div class="card-body">
+              <p class="card-text">{{project.description|truncatechars:130}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="" target="_blank" type="button" class="btn btn-sm btn-outline-primary">Rate</a>
+                  <a href="" type="button" class="btn btn-sm btn-warning">Review</a>
                 </div>
-                  <small class="text-muted">{{project.date_posted|timesince}} ago</small>
+                <div>
+                  <small class="text-mutedi" style="font-size: 0.5em;">{{project.date_posted|timesince}} ago</small>
                 </div>
+
               </div>
             </div>
           </div>
-          {% endfor %}
         </div>
+        {% endfor %}
       </div>
     </div>
+  </div>
 
-  </main>
+</main>
 
-  {% endblock %}
+{% endblock %}
