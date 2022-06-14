@@ -29,6 +29,10 @@ class ProjectCreateView(CreateView):
     fields = ['title', 'landing_page', 'description', 'link']
     template_name = 'project_form.html'
 
+    def form_valid(self, form):
+        form.instance.developer = self.request.user
+        return super().form_valid(form)
+
 def about(request):
     title='About'
     return render(request, 'about.html', {'title': title})
