@@ -9,39 +9,46 @@
         <img class="center-items py-5" src="{{ object.landing_page.url }}" style="width: 536px; height: 322px">
         <div class="text-center  mb-4">
             <h2 class="article-title"><a href="{{object.link}}">{{ object.title }}</a></h2>
-            <small class="text-mutedi">By <a class="text-mutedi"href="{% url 'user-projects' project.developer.username %}">{{ object.developer }}</a></small>
+            <small class="text-mutedi">By <a class="text-mutedi"
+                    href="{% url 'user-projects' project.developer.username %}">{{ object.developer }}</a></small>
         </div>
         <div>
             <p class="text-center">{{ object.description }}</p>
         </div>
         <div class="article-metadata mb-4">
-            <a href="{% url 'user-projects' project.developer.username %}">
-                <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
-            </a>
-            <small class="text-muted"> Posted {{ object.date_posted|timesince }} ago by 
-                <a class="mr-2" href="{% url 'user-projects' object.developer.username %}">
-                {{ object.developer }}
-                </a> 
-            </small>
+            <div class="text-center">
+                <div>
+                    <a href="{% url 'user-projects' project.developer.username %}">
+                        <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
+                    </a>
+                </div>
+                <div class="text-center">
+                    <small class="text-muted"> Posted {{ object.date_posted|timesince }} ago by
+                        <a class="mr-2" href="{% url 'user-projects' object.developer.username %}">
+                            {{ object.developer }}
+                        </a>
+                    </small>
+                </div>
+            </div>
             {% if object.developer == user %}
-            <div class="mt-3">
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-update' object.id %}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'project-delete' object.id %}">Delete</a>
+            <div class="mt-3 row">
+                <div class="col-5"></div>
+                <div class="col-4">
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'project-delete' object.id %}">Delete</a>
+                </div>
+                <div class="col-3"></div>
             </div>
             {% else %}
-            <div class="mt-3">
-                <a href="">
-                    <button type="button" class="btn btn-danger me-2">
-                      Rate
-                    </button>
-                  </a>
-                  <a href="">
-                    <button type="button" class="btn btn-warning me-2">
-                      Review
-                    </button>
-                  </a>
+            <div class="mt-3 row">
+                  <div class="col-5"></div>
+                  <div class="col-4">
+                    <a href="{% url 'project-detail' project.id %}" type="button" class="btn btn-sm btn-outline-info">View</a>
+                      <a href="#" type="button" class="btn btn-sm btn-warning">Review</a>
+                  </div>
+                  <div class="col-3"></div>
             </div>
-            
+
             {% endif %}
         </div>
     </section>
