@@ -33,13 +33,12 @@
                 <div>
                   <img class="rounded-circle project-img" src="{{ project.developer.profile.image.url}}">
                 </div>
-
                 <div>
                   <h5 class="card-title"><a class="text-mutedi" href="{% url 'project-detail' project.id %}">{{project.title}}</a></h5>
                 </div>
               </div>
             </div>
-            <img src="{{project.landing_page.url}}" alt="{{image.altText}}">
+            <img src="{{project.landing_page.url}}" alt="{{image.altText}}" style="width: 291px; height:193px;">
 
             <div class="card-body">
               <p class="card-text">{{project.description|truncatechars:50}}</p>
