@@ -15,7 +15,9 @@
             <p class="text-center">{{ object.description }}</p>
         </div>
         <div class="article-metadata mb-4">
-            <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
+            <a href="{% url 'user-projects' project.developer.username %}">
+                <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
+            </a>
             <small class="text-muted"> Posted {{ object.date_posted|timesince }} ago by 
                 <a class="mr-2" href="{% url 'user-projects' object.developer.username %}">
                 {{ object.developer }}
