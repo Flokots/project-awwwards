@@ -8,7 +8,7 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     link = models.CharField(max_length=100)
-    landing_page = models.ImageField(default='default_land.jpg', upload_to='landing_pages/')
+    landing_page = models.ImageField(upload_to='landing_pages/')
     date_posted = models.DateTimeField(default=timezone.now)
     developer = models.ForeignKey(User, on_delete=models.CASCADE)
 
