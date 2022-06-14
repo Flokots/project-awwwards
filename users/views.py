@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 
 from users.models import Profile
+from .serializer import ProfileSerializer
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 
@@ -40,3 +44,11 @@ def profile(request):
 
     title='Profile'
     return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form, 'title': title})
+
+
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)
