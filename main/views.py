@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView, 
     DetailView, 
     CreateView
 )
 from .models import Project
+
 
 
 def index(request):
@@ -24,7 +26,7 @@ class ProjectDetailView(DetailView):
     template_name = 'project_detail.html'
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     fields = ['title', 'landing_page', 'description', 'link']
     template_name = 'project_form.html'
