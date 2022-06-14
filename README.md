@@ -10,7 +10,7 @@ A project can be rated based on 3 different criteria
 These criteria can be reviewed on a scale of 1-10 and the average score is taken.
 
 ### Demo
-[The Nightngale Project Awwwards](https://thenightngale-project-awwwards.herokuapp.com/)]
+[The Nightngale Project Awwwards](https://thenightngale-project-awwwards.herokuapp.com/)
 
 ### Author
 [Florence Kotohoyoh](https://github.com/Flokots)
