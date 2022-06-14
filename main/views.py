@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -8,8 +10,9 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
+
 from .models import Project
-from users.models import Profile
+from .serializer import ProjectSerializer
 
 
 
@@ -98,3 +101,10 @@ def search_results(request):
 
         return render(request, 'search.html', {'message': message})
 
+
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        all_projects = Project.objects.all()
+        serializers = ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
+        
