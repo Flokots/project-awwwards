@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-1cpg170q^%($&eh6r^p8$tpe0)r2z1!4kv7)&#q@siaua3@tut
 DEBUG = True
 
 ALLOWED_HOSTS = ['https://thenightngale-project-awwwards.herokuapp.com/', '0.0.0.0']
-CSRF_TRUSTED_ORIGINS = ['https://thenightngale-project-awwwards.herokuapp.com/']
+
 
 # Application definition
 
@@ -154,3 +154,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
+
+CSRF_TRUSTED_ORIGINS = ['https://thenightngale-project-awwwards.herokuapp.com']
