@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-1cpg170q^%($&eh6r^p8$tpe0)r2z1!4kv7)&#q@siaua3@tut
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://thenightngale-project-awwwards.herokuapp.com/','0.0.0.0']
-
+ALLOWED_HOSTS = ['https://thenightngale-project-awwwards.herokuapp.com/', '0.0.0.0']
+CSRF_TRUSTED_ORIGINS = ['https://thenightngale-project-awwwards.herokuapp.com/', '0.0.0.0']
 
 # Application definition
 
