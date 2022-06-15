@@ -62,7 +62,7 @@ Should you notice any bug or  want to add a feature, follow these steps to contr
 4. Create a pull request.
 
 ### Known Bugs
-Copy Link button not functional
+Rate and Review features not yet functional
 ### Contact
 florencekotohoyoh@gmail.com
 ### License
