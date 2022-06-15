@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-1cpg170q^%($&eh6r^p8$tpe0)r2z1!4kv7)&#q@siaua3@tut
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://thenightngale-project-awwwards.herokuapp.com/']
 
 
 # Application definition
@@ -150,3 +150,7 @@ DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
