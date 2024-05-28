@@ -9,8 +9,6 @@ A project can be rated based on 3 different criteria
 
 These criteria can be reviewed on a scale of 1-10 and the average score is taken.
 
-### Demo
-[The Nightngale Project Awwwards](https://thenightngale-project-awwwards.herokuapp.com/)
 
 ### Author
 [Florence Kotohoyoh](https://github.com/Flokots)
@@ -27,20 +25,18 @@ As a user, I would like to:
 
 ### Technologies and Dependencies Used
 * Django
-* Python
-* Heroku
+* Python3.10.4
   
 ### Project Setup
 1. Clone this repository.
 2. `cd` into the cloned repository.
-3. Create a virtual environment
+3. Create a virtual environment and activate it.
 4. Install the dependencies using:
    ```
    pip install -r requirements.txt
    ```
 5. Create the database
    ```
-   $ python
    >>> psql;
    >>> CREATE DATABASE database_name;
    ```
