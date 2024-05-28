@@ -2,47 +2,52 @@
 
 {% block content %}
     {{ block.super }}
-    <header>
-        <h1>Project Detail</h1>
+    <header class="project-detail-header">
+        <h1>Project Details</h1>
     </header>
-    <div class="container">
-        <section class="project-header">
-            <h2><a href="{{ object.link }}">{{ object.title }}</a></h2>
-            <p>by <strong><a class="text-muted" href="{% url 'user-projects' object.developer.username %}">{{ object.developer }}</a></strong></p>
-            <img src="{{ object.landing_page.url }}" alt="Project Image" class="responsive-img">
+    <div class="project-detail-container">
+        <section class="project-detail-section project-header">
+            <h2><a class="text-dark" href="{{ object.link }}">{{ object.title }}</a></h2>
+            <p>by <strong><a class="text-muted"
+                             href="{% url 'user-projects' object.developer.username %}">{{ object.developer }}</a></strong>
+            </p>
+            <img src="{{ object.landing_page.url }}" alt="Project Image" class="project-detail-responsive-img">
         </section>
-        <section class="project-description">
+        <section class="project-detail-section project-description">
             <h2>Description</h2>
             <p>{{ object.description }}</p>
         </section>
-        <section class="project-ratings">
+        <section class="project-detail-section project-ratings">
             <h2>Ratings</h2>
-            <div class="rating">
-                <h3>Design</h3>
-                <div class="rating-scale">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Design</h5>
+                    <div class="rating-scale">
+                        <span>9.0/10</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Usability</h5>
+                    <div class="rating-scale">
+                        <span>8.0/10</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Content</h5>
+                    <div class="rating-scale">
+                        <span>8.0/10</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Average Rating</h5>
                     <span>8.5/10</span>
                 </div>
             </div>
-            <div class="rating">
-                <h3>Usability</h3>
-                <div class="rating-scale">
-                    <span>9.0/10</span>
-                </div>
-            </div>
-            <div class="rating">
-                <h3>Content</h3>
-                <div class="rating-scale">
-                    <span>8.0/10</span>
-                </div>
-            </div>
-            <div class="average-rating">
-                <h3>Average Rating</h3>
-                <span>8.5/10</span>
-            </div>
         </section>
-        <section class="project-feedback">
+        <section class="project-detail-section project-feedback">
             <h2>Feedback</h2>
-            <p>Peer feedback will be displayed here, providing insights and suggestions for improvement. This section is invaluable for the creator to understand how their project is perceived by others.</p>
+            <p>Peer feedback will be displayed here, providing insights and suggestions for improvement. This section is
+                invaluable for the creator to understand how their project is perceived by others.</p>
         </section>
         <section>
             <div class="article-metadata mb-4 text-center">
@@ -61,7 +66,41 @@
                 {% if object.developer == user %}
                     <div class="mt-3">
                         <a class="btn btn-secondary btn-sm" href="{% url 'project-update' object.id %}">Update</a>
-                        <a class="btn btn-danger btn-sm" href="{% url 'project-delete' object.id %}">Delete</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#deleteConfirmationModal">
+                            Delete
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteConfirmationModal" tabindex="-1"
+                             aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="POST" action="{% url 'project-delete' object.id %}">
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm
+                                                Deletion</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete the project -
+                                                <strong>{{ object.title }}</strong>?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                     </div>
                 {% else %}
                     <div class="mt-3">
@@ -69,7 +108,7 @@
                         <a class="btn btn-sm btn-warning" href="#">Review</a>
                     </div>
                 {% endif %}
-            </div>
-        </section>
+    </div>
+    </section>
     </div>
 {% endblock content %}
