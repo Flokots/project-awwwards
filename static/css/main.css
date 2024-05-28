@@ -73,3 +73,80 @@
   width: 55px;
   margin-right: 16px;
 }
+
+.about-us-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.about-us-container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.about-us-header {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.about-us-section {
+    background-color: #fff;
+    padding: 40px 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.about-us-section p, .about-us-section ul {
+    line-height: 1.6;
+}
+
+.about-us-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-us-section ul li {
+    margin-bottom: 10px;
+}
+
+.about-us-footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.responsive-img {
+    width: 600px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.why-us-img {
+    width: auto;
+    height: 600px;
+    margin-bottom: 20px;
+}
+
+.join-us-img {
+    width: auto;
+    height: 500px;
+    margin-bottom: 20px;
+}

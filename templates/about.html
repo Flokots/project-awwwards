@@ -1,26 +1,110 @@
-{%extends 'base.html'%}
-
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-{{block.super}}
+    {{ block.super }}
 
-<main>
-    <div class="container">
-        <div class="border-bottom mb-4 pt-3">
-            <h2 class="text-center">About Us</h2>
-        </div>
-        <div>
-            <p>Post your favorite projects and let your peers rate them.</p>
-            <p>*A project can be rated based on 3 different criteria: </p>
-            <ol>
-                <li>Design</li>
-                <li>Usability</li>
-                <li>Content</li>
-            </ol>
-            <p>The above criteria are reviewed on a scale of 1-10 and the average score is taken.</p>
-        </div>
-        <p>*Feature coming soon! </p>
+    <body class="about-us-body">
+    <header class="about-us-header">
+        <h1>About Us</h1>
+    </header>
+    <div class="about-us-container">
+        <section class="about-us-section">
+            <div class="row">
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <img src="{% static 'assets/mission.jpeg' %}" alt="How It Works Image" class="responsive-img">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <h2>Our Mission</h2>
+                    <p>At The Nightingale Project Awwwards, our mission is to cultivate a supportive and dynamic
+                        environment
+                        where creators can share their projects, receive constructive criticism, and improve through the
+                        power
+                        of peer evaluation.
+                    </p>
+                    <p>
+                        We aim to build a vibrant community where diverse ideas and perspectives
+                        come
+                        together to foster growth and excellence.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+        <section class="about-us-section">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>How It Works</h2>
+                    <p>The Nightingale Project Awwwards allows users to post their projects and invite peers to review
+                        and rate them based on three essential criteria:</p>
+                    <ul>
+                        <li><strong>Design:</strong> Evaluates the visual appeal, creativity, and overall aesthetic
+                            quality of the project.
+                        </li>
+                        <li><strong>Usability:</strong> Assesses the functionality, user-friendliness, and ease of
+                            interaction.
+                        </li>
+                        <li><strong>Content:</strong> Reviews the quality, relevance, and depth of the project’s
+                            material.
+                        </li>
+                    </ul>
+                    <p>Each criterion is rated on a scale of 1 to 10, and the average score provides a comprehensive
+                        overview of the project’s strengths and areas for improvement.</p>
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <img src="{% static 'assets/how-it-works.jpeg' %}" alt="How It Works Image" class="responsive-img">
+                </div>
+
+            </div>
+        </section>
+        <section class="about-us-section">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <img src="{% static 'assets/why-us.jpeg' %}" alt="How It Works Image" class="why-us-img">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Why Choose Us?</h2>
+                    <p>By joining our platform, you can:</p>
+                    <ul>
+                        <li><strong>Engage with the Community:</strong> Gain valuable insights and feedback from a
+                            diverse
+                            community of peers, helping you to improve and refine your projects.
+                        </li>
+                        <li><strong>Receive Comprehensive Evaluation:</strong> Our three-tier rating system ensures a
+                            well-rounded assessment, giving you a clear picture of how your project stands in terms of
+                            design,
+                            usability, and content.
+                        </li>
+                        <li><strong>Continuously Improve:</strong> Utilize the feedback and ratings to make informed
+                            adjustments
+                            to your work, turning every review into an opportunity for growth and learning.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="about-us-section">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Join Us</h2>
+                    <p>Whether you are a developer, designer, writer, or any other type of creator, The Nightingale
+                        Project
+                        Awwwards is the perfect platform for you to showcase your projects, learn from your peers, and
+                        contribute to a thriving community of innovators. Join us today and elevate your projects
+                        through the
+                        power of peer review.</p>
+                    <p><em>Welcome to The Nightingale Project Awwwards – Where Creativity Meets Critique!</em></p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <img src="{% static 'assets/join-us.jpeg' %}" alt="How It Works Image" class="join-us-img">
+                </div>
+            </div>
+        </section>
     </div>
-</main>
+    <footer class="about-us-footer">
+        <p>&copy; 2024 The Nightingale Project Awwwards. All rights reserved.</p>
+    </footer>
+    </body>
 
 
-  {% endblock %}
+{% endblock %}
