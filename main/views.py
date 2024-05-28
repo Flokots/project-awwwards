@@ -48,7 +48,7 @@ class ProjectDetailView(DetailView):
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
-    fields = ['title', 'link', 'description', 'landing_page' ]
+    fields = ['title', 'link', 'description', 'landing_page']
 
     def form_valid(self, form):
         form.instance.developer = self.request.user
@@ -57,7 +57,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
-    fields = ['title', 'landing_page', 'description', 'link']
+    fields = ['title', 'link', 'description', 'landing_page']
 
     def form_valid(self, form):
         form.instance.developer = self.request.user

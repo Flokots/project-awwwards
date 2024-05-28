@@ -224,5 +224,15 @@
 }
 
 .post-form {
-    background-color: #60c87b;
+    background-color: #037322;
+    color: #fff;
 }
+
+.border-top {
+    border-top: 1px solid #ced4da;
+}
+
+.logout-container {
+    border-top: 3em solid #fff;
+}
+
