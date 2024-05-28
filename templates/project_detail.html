@@ -1,57 +1,75 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 
 {% block content %}
-{{block.super}}
-
-
-<div class="container">
-    <section class="py-5">
-        <img class="center-items py-5" src="{{ object.landing_page.url }}" style="width: 536px; height: 322px">
-        <div class="text-center  mb-4">
-            <h2 class="article-title"><a href="{{object.link}}">{{ object.title }}</a></h2>
-            <small class="text-mutedi">By <a class="text-mutedi"
-                    href="{% url 'user-projects' project.developer.username %}">{{ object.developer }}</a></small>
-        </div>
-        <div>
-            <p class="text-center">{{ object.description }}</p>
-        </div>
-        <div class="article-metadata mb-4">
-            <div class="text-center">
+    {{ block.super }}
+    <header>
+        <h1>Project Detail</h1>
+    </header>
+    <div class="container">
+        <section class="project-header">
+            <h2><a href="{{ object.link }}">{{ object.title }}</a></h2>
+            <p>by <strong><a class="text-muted" href="{% url 'user-projects' object.developer.username %}">{{ object.developer }}</a></strong></p>
+            <img src="{{ object.landing_page.url }}" alt="Project Image" class="responsive-img">
+        </section>
+        <section class="project-description">
+            <h2>Description</h2>
+            <p>{{ object.description }}</p>
+        </section>
+        <section class="project-ratings">
+            <h2>Ratings</h2>
+            <div class="rating">
+                <h3>Design</h3>
+                <div class="rating-scale">
+                    <span>8.5/10</span>
+                </div>
+            </div>
+            <div class="rating">
+                <h3>Usability</h3>
+                <div class="rating-scale">
+                    <span>9.0/10</span>
+                </div>
+            </div>
+            <div class="rating">
+                <h3>Content</h3>
+                <div class="rating-scale">
+                    <span>8.0/10</span>
+                </div>
+            </div>
+            <div class="average-rating">
+                <h3>Average Rating</h3>
+                <span>8.5/10</span>
+            </div>
+        </section>
+        <section class="project-feedback">
+            <h2>Feedback</h2>
+            <p>Peer feedback will be displayed here, providing insights and suggestions for improvement. This section is invaluable for the creator to understand how their project is perceived by others.</p>
+        </section>
+        <section>
+            <div class="article-metadata mb-4 text-center">
                 <div>
-                    <a href="{% url 'user-projects' project.developer.username %}">
+                    <a href="{% url 'user-projects' object.developer.username %}">
                         <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
                     </a>
                 </div>
-                <div class="text-center">
+                <div>
                     <small class="text-muted"> Posted {{ object.date_posted|timesince }} ago by
-                        <a class="mr-2" href="{% url 'user-projects' object.developer.username %}">
+                        <a href="{% url 'user-projects' object.developer.username %}">
                             {{ object.developer }}
                         </a>
                     </small>
                 </div>
+                {% if object.developer == user %}
+                    <div class="mt-3">
+                        <a class="btn btn-secondary btn-sm" href="{% url 'project-update' object.id %}">Update</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'project-delete' object.id %}">Delete</a>
+                    </div>
+                {% else %}
+                    <div class="mt-3">
+                        <a class="btn btn-sm btn-outline-info" href="{% url 'project-detail' object.id %}">View</a>
+                        <a class="btn btn-sm btn-warning" href="#">Review</a>
+                    </div>
+                {% endif %}
             </div>
-            {% if object.developer == user %}
-            <div class="mt-3 row">
-                <div class="col-5"></div>
-                <div class="col-4">
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'project-update' object.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'project-delete' object.id %}">Delete</a>
-                </div>
-                <div class="col-3"></div>
-            </div>
-            {% else %}
-            <div class="mt-3 row">
-                  <div class="col-5"></div>
-                  <div class="col-4">
-                    <a href="{% url 'project-detail' project.id %}" type="button" class="btn btn-sm btn-outline-info">View</a>
-                      <a href="#" type="button" class="btn btn-sm btn-warning">Review</a>
-                  </div>
-                  <div class="col-3"></div>
-            </div>
-
-            {% endif %}
-        </div>
-    </section>
-</div>
-
+        </section>
+    </div>
 {% endblock content %}
