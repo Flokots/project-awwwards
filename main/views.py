@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.views.generic import (
-    ListView, 
-    DetailView, 
+    ListView,
+    DetailView,
     CreateView,
     UpdateView,
     DeleteView,
@@ -15,16 +15,15 @@ from .models import Project
 from .serializer import ProjectSerializer
 
 
-
 def index(request):
-    title='Home'
-    projects= Project.objects.all()
+    title = 'Home'
+    projects = Project.objects.all()
     return render(request, 'index.html', {'title': title, 'projects': projects})
 
 
 class ProjectListView(ListView):
     model = Project
-    template_name = 'index.html' # <app>/<model>_<viewtype>.html
+    template_name = 'index.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'projects'
     ordering = ['-date_posted']
     paginate_by = 3
@@ -32,7 +31,7 @@ class ProjectListView(ListView):
 
 class UserProjectListView(ListView):
     model = Project
-    template_name = 'main/user_projects.html' # <app>/<model>_<viewtype>.html
+    template_name = 'main/user_projects.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'projects'
     paginate_by = 3
 
@@ -81,9 +80,8 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-
 def about(request):
-    title='About'
+    title = 'About'
     return render(request, 'about.html', {'title': title})
 
 
@@ -94,7 +92,7 @@ def search_results(request):
 
         message = f'{search_term}'
 
-        return render(request, 'search.html', {'message':message, 'projects': searched_projects})
+        return render(request, 'search.html', {'message': message, 'projects': searched_projects})
 
     else:
         message = "You haven't searched for any project"
@@ -107,4 +105,3 @@ class ProjectList(APIView):
         all_projects = Project.objects.all()
         serializers = ProjectSerializer(all_projects, many=True)
         return Response(serializers.data)
-        
