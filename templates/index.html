@@ -5,95 +5,73 @@
     {{ block.super }}
 
     <main>
-        <section class="py-3 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-auto d-none d-lg-block">
-                    <img src="{% static 'assets/awards.jpg' %}" width="200" height="250" class="rounded">
-                </div>
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1>The Nightngale Project Awwwards</h1>
-                    <p>
-                        Post a project and let your peers review it.
-                    </p>
-                    <p>
-                        <a href="{% url 'project-create' %}" class="btn btn-warning my-2 text-uppercase">Post</a>
-                        <a href="#projects" class="btn btn-outline-info my-2 text-uppercase">View</a>
-                    </p>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                    <img src="{% static 'assets/award_badge.jpg' %}" width="200" height="250" class="rounded-circle">
+        <section class="py-5 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 mb-4">
+                        <img src="{% static 'assets/awards.jpg' %}" width="300" height="auto" class="img-fluid rounded" alt="Awards Image">
+                    </div>
+                    <div class="col-md-8 my-auto">
+                        <h1 class="display-4 mb-4">The Nightngale Project Awwwards</h1>
+                        <p class="lead mb-4">Post a project and let your peers review it.</p>
+                        <div class="d-grid gap-3 d-md-block">
+                            <a href="{% url 'project-create' %}" class="btn btn-warning btn-lg">Post</a>
+                            <a href="#projects" class="btn btn-outline-info btn-lg">View Projects</a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-4">
+                        <img src="{% static 'assets/awards.jpg' %}" width="300" height="auto" class="img-fluid rounded" alt="Awards Image">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <div class="album py-5" id="projects">
-                <div class="container">
-                    <h2 class="mb-4 pt-3 text-center border-bottom">Projects</h2>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        {% for project in projects %}
-                            <div class="col">
-                                <div class="card shadow-sm album-card">
-                                    <img src="{{ project.landing_page.url }}" alt="{{ image.altText }}">
-
-                                    <div class="card-body">
-                                        <div class="col-3">
-                                        </div>
-                                        <div class="col-9">
-                                            <h5 class="card-title text-capitalize text-left">{{ project.title }}</h5>
-                                        </div>
-                                        <p class="card-text">{{ project.description|truncatechars:50 }}</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <a href="{% url 'project-detail' project.id %}" type="button"
-                                                   class="btn btn-sm btn-outline-info">View</a>
-                                            </div>
-                                            <div>
-                                                <small class="text-mutedi"
-                                                       style="font-size: 0.6em;">{{ project.date_posted|timesince }}
-                                                    ago</small>
-                                            </div>
-
-                                        </div>
-                                    </div>
+        <section class="py-5" id="projects">
+            <div class="container">
+                <h2 class="mb-5 text-center">Projects</h2>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for project in projects %}
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <img src="{{ project.landing_page.url }}" class="card-img-top" alt="{{ image.altText }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ project.title }}</h5>
+                                    <p class="card-text">{{ project.description|truncatechars:100 }}</p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <a href="{% url 'project-detail' project.id %}" class="btn btn-sm btn-info">View</a>
+                                    <small class="text-muted">{{ project.date_posted|timesince }} ago</small>
                                 </div>
                             </div>
-                        {% endfor %}
-                    </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="py-3 col-7">
-                            {% if is_paginated %}
-
-                                {% if page_obj.has_previous %}
-                                    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-                                    <a class="btn btn-outline-info mb-4"
-                                       href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                                {% endif %}
-
-                                {% for num in page_obj.paginator.page_range %}
-                                    {% if page_obj.number == num %}
-                                        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-                                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a
-                                            class="btn btn-outline-info mb-4" href="?page={{ num }}"> {{ num }} </a>
-                                    {% endif %}
-                                {% endfor %}
-
-                                {% if page_obj.has_next %}
-                                    <a class="btn btn-outline-info mb-4"
-                                       href="?page={{ page_obj.next_page_number }}">Next</a>
-                                    <a class="btn btn-outline-info mb-4"
-                                       href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-                                {% endif %}
-
-                            {% endif %}
                         </div>
-                        <div class="col-2"></div>
+                    {% endfor %}
+                </div>
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        {% if is_paginated %}
+                            <nav aria-label="Pagination">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                                    {% endif %}
+                                    {% for num in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == num %}
+                                            <li class="page-item active" aria-current="page"><span class="page-link">{{ num }}</span></li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
                     </div>
-
                 </div>
             </div>
         </section>
     </main>
-
 {% endblock %}
