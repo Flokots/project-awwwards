@@ -124,6 +124,12 @@ class ProjectAddReview(LoginRequiredMixin, CreateView):
     fields = ['design_rating', 'usability_rating', 'content_rating', 'comment']
     template_name = 'add_review.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project_id = self.kwargs.get('project_id')
+        context['project'] = get_object_or_404(Project, id=project_id)
+        return context
+
     def form_valid(self, form):
         # Get the project by ID from the URL
         project_id = self.kwargs['project_id']

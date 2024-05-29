@@ -99,6 +99,7 @@
 .about-us-header h1 {
     margin: 0;
     font-size: 2.5em;
+    color: #066239;
 }
 
 .about-us-section {
@@ -111,6 +112,7 @@
 .about-us-section h2 {
     font-size: 2em;
     margin-bottom: 20px;
+    color: #066239;
 }
 
 .about-us-section p, .about-us-section ul {
