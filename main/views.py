@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.views.generic import (
@@ -11,8 +12,10 @@ from django.views.generic import (
     DeleteView,
 )
 
-from .models import Project
 from .serializer import ProjectSerializer
+from django.shortcuts import render, redirect
+from .models import Project, Review
+from .forms import ReviewForm
 
 
 def index(request):
@@ -105,3 +108,16 @@ class ProjectList(APIView):
         all_projects = Project.objects.all()
         serializers = ProjectSerializer(all_projects, many=True)
         return Response(serializers.data)
+
+
+def add_review(request, project_id):
+    project = Project.objects.get(pk=project_id)
+    form = ReviewForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.project = project
+            review.save()
+            return redirect('project-detail', pk=project_id)
+    return render(request, 'add_review.html', {'form': form, 'project': project})

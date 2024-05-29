@@ -6,6 +6,7 @@ from .views import (
     ProjectUpdateView, 
     ProjectDeleteView,
     UserProjectListView,
+    add_review,
 )
 from . import views
 
@@ -18,6 +19,8 @@ urlpatterns=[
     path('project/<int:pk>/delete/', ProjectDeleteView.as_view(), name='project-delete'),
     path('about/', views.about, name='about'),
     path('search/', views.search_results, name='search_results'),
+    path('project/<int:pk>/review/', views.add_review, name='add-review'),
     path('api/project/', views.ProjectList.as_view()),
+
 ]
 

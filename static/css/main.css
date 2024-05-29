@@ -154,13 +154,13 @@
 .project-detail-container {
     width: 80%;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 10px auto;
+    padding: 40px;
 }
 
 .project-detail-header {
     text-align: center;
-    padding: 50px 0;
+    padding: 20px 0;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -197,9 +197,9 @@
 }
 
 .project-detail-responsive-img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
+    width: auto;
+    height: 600px;
+    margin-bottom: 10px;
 }
 
 .project-description, .project-ratings, .project-feedback {
