@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from rest_framework import viewsets
+from django.urls import reverse_lazy
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.views.generic import (
@@ -13,9 +13,8 @@ from django.views.generic import (
 )
 
 from .serializer import ProjectSerializer
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import Project, Review
-from .forms import ReviewForm
 
 
 def index(request):
@@ -46,6 +45,16 @@ class UserProjectListView(ListView):
 class ProjectDetailView(DetailView):
     model = Project
     template_name = 'project_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project = self.get_object()
+        context['reviews'] = project.reviews.all()
+        context['average_design_rating'] = project.average_design_rating()
+        context['average_usability_rating'] = project.average_usability_rating()
+        context['average_content_rating'] = project.average_content_rating()
+        context['average_rating'] = project.average_rating()
+        return context
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
@@ -110,14 +119,23 @@ class ProjectList(APIView):
         return Response(serializers.data)
 
 
-def add_review(request, project_id):
-    project = Project.objects.get(pk=project_id)
-    form = ReviewForm(request.POST or None)
-    if request.method == 'POST':
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.project = project
-            review.save()
-            return redirect('project-detail', pk=project_id)
-    return render(request, 'add_review.html', {'form': form, 'project': project})
+class ProjectAddReview(LoginRequiredMixin, CreateView):
+    model = Review
+    fields = ['design_rating', 'usability_rating', 'content_rating', 'comment']
+    template_name = 'add_review.html'
+
+    def form_valid(self, form):
+        # Get the project by ID from the URL
+        project_id = self.kwargs['project_id']
+        project = get_object_or_404(Project, id=project_id)
+
+        # Set the user and project before saving the form
+        form.instance.user = self.request.user
+        form.instance.project = project
+
+        # Save the form
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirect to the project detail page after successful review submission
+        return reverse_lazy('project-detail', kwargs={'pk': self.kwargs['project_id']})

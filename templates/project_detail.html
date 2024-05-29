@@ -3,108 +3,127 @@
 {% block content %}
     {{ block.super }}
     <div class="project-detail-container">
-    <header class="project-detail-header project-header">
-        <h1><a class="text-dark" href="{{ object.link }}">{{ object.title }}</a></h1>
-    </header>
-    <section class="project-detail-section project-header">
-        <p>by <strong><a class="text-muted"
-                         href="{% url 'user-projects' object.developer.username %}">{{ object.developer }}</a></strong>
-        </p>
-        <img src="{{ object.landing_page.url }}" alt="Project Image" class="project-detail-responsive-img">
-    </section>
-    <section class="project-detail-section project-description">
-        <h2>Description</h2>
-        <p>{{ object.description }}</p>
-    </section>
-    <section class="project-detail-section project-ratings">
-        <h2>Ratings</h2>
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-4 rating">
-                <h5>Design</h5>
-                <div class="rating-scale">
-                    <span>9.0/10</span>
+        <header class="project-detail-header project-header">
+            <h1><a class="text-dark" href="{{ object.link }}">{{ object.title }}</a></h1>
+        </header>
+        <section class="project-detail-section project-header">
+            <p>by <strong><a class="text-muted"
+                             href="{% url 'user-projects' object.developer.username %}">{{ object.developer }}</a></strong>
+            </p>
+            <img src="{{ object.landing_page.url }}" alt="Project Image" class="project-detail-responsive-img">
+        </section>
+        <section class="project-detail-section project-description">
+            <h2>Description</h2>
+            <p>{{ object.description }}</p>
+        </section>
+        <section class="project-detail-section project-ratings">
+            <h2>Ratings</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Design</h5>
+                    <div class="rating-scale">
+                        <span>{{ average_design_rating|floatformat:1 }}/10</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Usability</h5>
+                    <div class="rating-scale">
+                        <span>{{ average_usability_rating|floatformat:1 }}/10</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Content</h5>
+                    <div class="rating-scale">
+                        <span>{{ average_content_rating|floatformat:1 }}/10</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 rating">
+                    <h5>Average Rating</h5>
+                    <span>{{ average_rating|floatformat:1 }}/10</span>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 rating">
-                <h5>Usability</h5>
-                <div class="rating-scale">
-                    <span>8.0/10</span>
+        </section>
+        <section class="project-feedback">
+            <h2>Feedback</h2>
+            {% if reviews %}
+                <div class="row">
+                    {% for review in reviews %}
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card text-white bg-dark" style="width: 18rem;">
+                                <div class="card-body">
+                                    <p><strong>Reviewer:</strong> {{ review.user.username }}</p>
+                                    <p><strong>Design Rating:</strong> {{ review.design_rating }}/10</p>
+                                    <p><strong>Usability Rating:</strong> {{ review.usability_rating }}/10</p>
+                                    <p><strong>Content Rating:</strong> {{ review.content_rating }}/10</p>
+                                    <p><strong>Comment:</strong> {{ review.comment }}</p>
+                                    <p><small class="text-muted">Reviewed
+                                        on {{ review.date_reviewed|date:"d M Y" }}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 rating">
-                <h5>Content</h5>
-                <div class="rating-scale">
-                    <span>8.0/10</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 rating">
-                <h5>Average Rating</h5>
-                <span>8.5/10</span>
-            </div>
-        </div>
-    </section>
-    <section class="project-detail-section project-feedback">
-        <h2>Feedback</h2>
-        <p>Peer feedback will be displayed here, providing insights and suggestions for improvement. This section is
-            invaluable for the creator to understand how their project is perceived by others.</p>
-    </section>
-    <section>
-        <div class="article-metadata mb-4 text-center">
-            <div>
-                <a href="{% url 'user-projects' object.developer.username %}">
-                    <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
-                </a>
-            </div>
-            <div>
-                <small class="text-muted"> Posted {{ object.date_posted|timesince }} ago by
+            {% else %}
+                <p>No reviews yet. Be the first to review this project!</p>
+            {% endif %}
+        </section>
+        <section>
+            <div class="article-metadata mb-4 text-center">
+                <div>
                     <a href="{% url 'user-projects' object.developer.username %}">
-                        {{ object.developer }}
+                        <img class="rounded-circle project-img" src="{{ object.developer.profile.image.url }}">
                     </a>
-                </small>
-            </div>
-            {% if object.developer == user %}
-                <div class="mt-3">
-                    <a class="btn btn-secondary btn-sm" href="{% url 'project-update' object.id %}">Update</a>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#deleteConfirmationModal">
-                        Delete
-                    </button>
+                </div>
+                <div>
+                    <small class="text-muted"> Posted {{ object.date_posted|timesince }} ago by
+                        <a href="{% url 'user-projects' object.developer.username %}">
+                            {{ object.developer }}
+                        </a>
+                    </small>
+                </div>
+                {% if object.developer == user %}
+                    <div class="mt-3">
+                        <a class="btn btn-secondary btn-sm" href="{% url 'project-update' object.id %}">Update</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#deleteConfirmationModal">
+                            Delete
+                        </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1"
-                         aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form method="POST" action="{% url 'project-delete' object.id %}">
-                                    {% csrf_token %}
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm
-                                            Deletion</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Are you sure you want to delete the project -
-                                            <strong>{{ object.title }}</strong>?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                            Cancel
-                                        </button>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </div>
-                                </form>
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteConfirmationModal" tabindex="-1"
+                             aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="POST" action="{% url 'project-delete' object.id %}">
+                                        {% csrf_token %}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm
+                                                Deletion</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete the project -
+                                                <strong>{{ object.title }}</strong>?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                </div>
-            {% else %}
-                <div class="mt-3">
-                    <a href="{% url 'add-review' project.id %}" class="btn btn-outline-success">Add Review</a>
-                </div>
-            {% endif %}
-    </section>
+                    </div>
+                {% else %}
+                    <div class="mt-3">
+                        <a href="{% url 'add-review' project.id %}" class="btn btn-outline-success">Add Review</a>
+                    </div>
+                {% endif %}
+        </section>
     </div>
 {% endblock content %}

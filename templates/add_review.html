@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="container">
-        <h2 class="pt-3 mb-4 text-center">Add Review for {{ project.title }}</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary">Submit Review</button>
-        </form>
-    </div>
+{{ block.super }}
+
+<div class="container">
+    <h2 class="pt-3 text-center">Add Review for {{ project.title }}</h2>
+    <form method="post" class="pt-3">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-info mb-3 mt-3">Submit Review</button>
+        </div>
+    </form>
+</div>
+
 {% endblock %}
