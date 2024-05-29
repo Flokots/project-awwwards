@@ -4,7 +4,6 @@ from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
 from users.models import Profile
 from .serializer import ProfileSerializer
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
@@ -21,7 +20,7 @@ def register(request):
     else:
         form = UserRegisterForm()
 
-    title='Register'
+    title = 'Register'
     return render(request, 'users/register.html', {'form': form, 'title': title})
 
 
@@ -42,9 +41,8 @@ def profile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    title='Profile'
+    title = 'Profile'
     return render(request, 'users/profile.html', {'u_form': u_form, 'p_form': p_form, 'title': title})
-
 
 
 class ProfileList(APIView):
